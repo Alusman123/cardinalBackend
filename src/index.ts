@@ -4,6 +4,7 @@ import { connectDB } from './config/db';
 import { seedAdmin } from './config/seed';
 import authRoutes from './routes/auth';
 import adminRoutes from './routes/admin';
+import postRoutes from './routes/post';
 import cors from 'cors';
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/posts', postRoutes);
 
 const start = async () => {
   await connectDB();
