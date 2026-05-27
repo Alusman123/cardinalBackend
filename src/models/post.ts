@@ -7,6 +7,8 @@ export interface IPost extends Document {
   content: string;
   createdAt: Date;
   createdBy: mongoose.Types.ObjectId;
+  isHidden: boolean;
+  hiddenFrom: mongoose.Types.ObjectId[];
 }
 
 const PostSchema = new Schema<IPost>({
@@ -16,6 +18,8 @@ const PostSchema = new Schema<IPost>({
   content: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  isHidden: { type: Boolean, default: false },
+  hiddenFrom: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 export default mongoose.model<IPost>('Post', PostSchema);
